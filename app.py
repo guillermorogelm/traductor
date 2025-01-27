@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 import os
-from streamlit_extras.copy_button import copy_button
+from streamlit_copybutton import copy_button
 
 # Configuración de la página
 st.set_page_config(
@@ -78,12 +78,12 @@ with col2:
                     st.success("✅ Traducción exitosa:")
                     st.write(traduccion)
                     
-                    # Agregar el botón de copiar usando streamlit-extras
+                    # Agregar el botón de copiar usando streamlit-copybutton
                     copy_button(
                         label="📋 Copiar",
                         key="copy_traduccion",
                         text=traduccion,
-                        copy_tooltip="Copiar al portapapeles",
+                        tooltip="Copiar al portapapeles",
                         icon="📋",
                         style="success"  # Puedes ajustar el estilo según prefieras
                     )
