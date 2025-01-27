@@ -1,7 +1,6 @@
-import streamlit as st
+import streamlit as st 
 import requests
 import os
-from streamlit_copybutton import copy_button  # Import correcto
 
 # Configuración de la página
 st.set_page_config(
@@ -78,15 +77,39 @@ with col2:
                     st.success("✅ Traducción exitosa:")
                     st.write(traduccion)
                     
-                    # Agregar el botón de copiar usando streamlit-copybutton
-                    copy_button(
-                        label="📋 Copiar",
-                        key="copy_traduccion",
-                        text=traduccion,
-                        tooltip="Copiar al portapapeles",
-                        icon="📋",
-                        style="success"  # Opcional: puedes cambiar el estilo según prefieras
-                    )
+                    # Agregar el botón de copiar usando HTML y JavaScript
+                    # Escapar comillas simples en la traducción para evitar conflictos en JavaScript
+                    traduccion_escapada = traduccion.replace("'", "\\'")
+                    copy_button_html = f"""
+                    <button onclick="copyToClipboard()" style="
+                        background-color: #4B8BBE;
+                        border: none;
+                        color: white;
+                        padding: 10px 20px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-size: 16px;
+                        margin: 4px 2px;
+                        cursor: pointer;
+                        border-radius: 5px;
+                    ">
+                        📋 Copiar
+                    </button>
+
+                    <script>
+                    function copyToClipboard() {{
+                        const text = '{traduccion_escapada}';
+                        navigator.clipboard.writeText(text).then(function() {{
+                            alert('Texto copiado al portapapeles');
+                        }}, function(err) {{
+                            alert('Error al copiar el texto: ' + err);
+                        }});
+                    }}
+                    </script>
+                    """
+                    
+                    st.markdown(copy_button_html, unsafe_allow_html=True)
                 else:
                     st.error("❌ No se encontró el campo 'translations' en la respuesta de la API.")
                     st.write(data)
