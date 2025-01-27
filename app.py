@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 import os
-from streamlit_copybutton import copy_button
+from streamlit_copybutton import copy_button  # Import correcto
 
 # Configuración de la página
 st.set_page_config(
@@ -85,7 +85,7 @@ with col2:
                         text=traduccion,
                         tooltip="Copiar al portapapeles",
                         icon="📋",
-                        style="success"  # Puedes ajustar el estilo según prefieras
+                        style="success"  # Opcional: puedes cambiar el estilo según prefieras
                     )
                 else:
                     st.error("❌ No se encontró el campo 'translations' en la respuesta de la API.")
