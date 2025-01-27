@@ -62,7 +62,7 @@ with col2:
             st.warning("⚠️ Por favor, introduce algún texto para traducir.")
         else:
             # Obtener la API Key desde los secrets de Streamlit
-            API_KEY = st.secrets["DEEPL_API_KEY"]
+            API_KEY = st.secrets["d056980c-2647-48d7-a55b-779d098bc7a2:fx"]
 
             # Endpoint para la API gratuita de DeepL
             url = "https://api-free.deepl.com/v2/translate"
