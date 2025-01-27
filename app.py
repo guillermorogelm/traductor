@@ -93,5 +93,5 @@ st.markdown(
     <hr>
     <p style='text-align: center;'>Desarrollado por <a href='https://github.com/tu_usuario'>Tu Nombre</a></p>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
