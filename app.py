@@ -1,28 +1,19 @@
 import streamlit as st
 import requests
 import os
-from streamlit.components.v1 import html
 
 # Configuración de la página
 st.set_page_config(
-    page_title="🔤 Traductor Simple con DeepL API",
+    page_title="🔤 Traductor Simple de Guillermo",
     page_icon="🔤",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
 
-# Estilos personalizados
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
-# Puedes crear un archivo CSS llamado "styles.css" en el mismo directorio y agregar estilos personalizados
-# local_css("styles.css")
-
 # Título y descripción
 st.markdown(
     """
-    <h1 style='text-align: center; color: #4B8BBE;'>🔤 Traductor Simple con DeepL API</h1>
+    <h1 style='text-align: center; color: #D2B48C;'>🔤 Traductor Simple de Guillermo</h1>
     <p style='text-align: center;'>Traduce textos de manera rápida y eficiente entre múltiples idiomas.</p>
     """,
     unsafe_allow_html=True,
@@ -87,20 +78,22 @@ with col2:
                     st.write(traduccion)
                     
                     # Agregar el botón de copiar
-                    copy_button = """
+                    # Escapar comillas simples en la traducción para evitar conflictos en JavaScript
+                    traduccion_escapada = traduccion.replace("'", "\\'")
+                    copy_button = f"""
                     <button onclick="copyToClipboard()" style="background-color:#4B8BBE;border:none;color:white;padding:10px 20px;text-align:center;text-decoration:none;
                     display:inline-block;font-size:16px;margin:4px 2px;cursor:pointer;border-radius:5px;">📋 Copiar</button>
 
                     <script>
-                    function copyToClipboard() {
-                        navigator.clipboard.writeText(`{text}`).then(function() {{
+                    function copyToClipboard() {{
+                        navigator.clipboard.writeText('{traduccion_escapada}').then(function() {{
                             alert('Texto copiado al portapapeles');
                         }}, function(err) {{
-                            alert('Error al copiar el texto: ', err);
+                            alert('Error al copiar el texto: ' + err);
                         }});
-                    }
+                    }}
                     </script>
-                    """.format(text=traduccion.replace('`', '\\`'))
+                    """
                     
                     st.markdown(copy_button, unsafe_allow_html=True)
                 else:
@@ -112,7 +105,6 @@ with col2:
                 st.error(f"❌ Error en la solicitud: {req_err}")
             except ValueError:
                 st.error("❌ Error al decodificar la respuesta en formato JSON.")
-
     else:
         st.info("🔍 Introduce el texto y selecciona el idioma para comenzar la traducción.")
 
