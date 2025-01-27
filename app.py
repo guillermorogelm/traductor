@@ -1,6 +1,7 @@
 import streamlit as st 
 import requests
 import os
+import json  # Importar el módulo json
 
 # Configuración de la página
 st.set_page_config(
@@ -77,9 +78,10 @@ with col2:
                     st.success("✅ Traducción exitosa:")
                     st.write(traduccion)
                     
+                    # Serializar el texto traducido para JavaScript
+                    traduccion_json = json.dumps(traduccion)
+                    
                     # Agregar el botón de copiar usando HTML y JavaScript
-                    # Escapar comillas simples en la traducción para evitar conflictos en JavaScript
-                    traduccion_escapada = traduccion.replace("'", "\\'")
                     copy_button_html = f"""
                     <button onclick="copyToClipboard()" style="
                         background-color: #4B8BBE;
@@ -99,7 +101,7 @@ with col2:
 
                     <script>
                     function copyToClipboard() {{
-                        const text = '{traduccion_escapada}';
+                        const text = {traduccion_json};
                         navigator.clipboard.writeText(text).then(function() {{
                             alert('Texto copiado al portapapeles');
                         }}, function(err) {{
