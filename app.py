@@ -1,7 +1,5 @@
 import streamlit as st
 import requests
-import os
-import json  # Importar el módulo json
 
 # Configuración de la página
 st.set_page_config(
