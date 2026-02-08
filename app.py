@@ -135,7 +135,7 @@ if translate_clicked:
         st.error("Por favor, introduce un texto válido para traducir.")
     else:
         # Configuración de la API de DeepL (usa el endpoint gratuito si es el plan Free)
-        DEEPL_API_KEY = "2ebe1f84-15df-422e-9239-d802082f310c:fx"  # Reemplaza con tu clave API real
+        DEEPL_API_KEY = "API_KEY"  # Reemplaza con tu clave API real
         DEEPL_ENDPOINT = "https://api-free.deepl.com/v2/translate"
         
         # Preparar los datos para la solicitud
@@ -155,3 +155,4 @@ if translate_clicked:
             output_placeholder.markdown(output_html, unsafe_allow_html=True)
         else:
             st.error(f"Error en la solicitud: {response.status_code} - {response.text}")
+
